@@ -31,8 +31,58 @@ CREATE TABLE Categoria(ID_Categoria SERIAL PRIMARY KEY, Nombre_Categoria VARCHAR
 
 CREATE TABLE Factura(Num_Factura SERIAL PRIMARY KEY, Fecha DATE NOT NULL, Sub_Total INT NOT NULL, IVA DECIMAL(3,2) NOT NULL, Total_Compra INT NOT NULL, ID_Cliente INT NOT NULL REFERENCES Cliente(ID_Cliente));
 
-CREATE TABLE Productos(ID_Productos SERIAL PRIMARY KEY, Nombre_Producto VARCHAR(250) NOT NULL, Precio_Unitario INT NOT NULL , Cantidad INT NOT NULL, Valor_Total INT NOT NULL, ID_Categoria INT NOT NULL REFERENCES Categoria(ID_Categoria));
+CREATE TABLE Productos(ID_Productos SERIAL PRIMARY KEY, Nombre_Producto VARCHAR(250) NOT NULL, Precio_Unitario INT NOT NULL, ID_Categoria INT NOT NULL REFERENCES Categoria(ID_Categoria));
 
 CREATE TABLE Detalle_Compra(Num_Factura INT NOT NULL REFERENCES Factura(Num_Factura), ID_Producto INT NOT NULL REFERENCES Productos(ID_Productos),Precio_Unitario INT NOT NULL, Cantidad INT NOT NULL, Valor_Total INT NOT NULL);
 
+--REVIZANDO TABLAS-
 
+SELECT * FROM Cliente;
+SELECT * FROM Categoria;
+SELECT * FROM Factura;
+SELECT * FROM Productos;
+SELECT * FROM Detalle_compra;
+
+--##Parte 2: Creando el modelo en la base de datos##--
+--Se debe crear el modelo en la base de datos, en una base de datos llamada prueba , e insertar los
+--siguientes registros:
+----#  5 clientes
+----#  8 productos
+----#  3 categorias
+----#  10 facturas
+
+----#  2 para el cliente 1, con 2 y 3 productos
+----#  3 para el cliente 2, con 3, 2 y 3 productos
+----#  1 para el cliente 3, con 1 producto
+----#  4 para el cliente 4, con 2, 3, 4 y 1 producto
+--------------------------------------------------------------
+
+----#  5 clientes
+INSERT INTO cliente(Nombre_Cliente, RUT, Direccion) VALUES ('Cliente1', '12123123-1', 'Pasaje #001');
+INSERT INTO cliente(Nombre_Cliente, RUT, Direccion) VALUES ('Cliente2', '12123123-2', 'Pasaje #002');
+INSERT INTO cliente(Nombre_Cliente, RUT, Direccion) VALUES ('Cliente3', '12123123-3', 'Pasaje #003');
+INSERT INTO cliente(Nombre_Cliente, RUT, Direccion) VALUES ('Cliente4', '12123123-4', 'Pasaje #004');
+INSERT INTO cliente(Nombre_Cliente, RUT, Direccion) VALUES ('Cliente4', '12123123-4', 'Pasaje #005');
+
+SELECT * FROM Cliente;
+
+
+----#  3 categorias
+INSERT INTO Categoria(Nombre_Categoria,  Descripcion) VALUES ('HIGIENE PERSONAL', 'DESODORANTE, SHAMPOO, PASTA DENTAL, ETC'); 
+INSERT INTO Categoria(Nombre_Categoria,  Descripcion) VALUES ('BEBIDAS ALCOLICAS', 'PISCO, RON, CERVEZA, ETC'); 
+INSERT INTO Categoria(Nombre_Categoria,  Descripcion) VALUES ('CEREAL', 'CHOCAPIC, MILO, MONO-ROLLS, ETC'); 
+
+SELECT * FROM Categoria;
+
+----#  8 productos
+INSERT INTO Productos(Nombre_Producto, Precio_Unitario, ID_Categoria) VALUES ('AXE',1500,1);
+INSERT INTO Productos(Nombre_Producto, Precio_Unitario, ID_Categoria) VALUES ('REXONA',1900,1);
+INSERT INTO Productos(Nombre_Producto, Precio_Unitario, ID_Categoria) VALUES ('PASTA PEPSODENT',2000,1);
+INSERT INTO Productos(Nombre_Producto, Precio_Unitario, ID_Categoria) VALUES ('CERVEZA DUFF',500,2);
+INSERT INTO Productos(Nombre_Producto, Precio_Unitario, ID_Categoria) VALUES ('CERVEZA VIKINGA',1500,2);
+INSERT INTO Productos(Nombre_Producto, Precio_Unitario, ID_Categoria) VALUES ('VODKA NEGRO',3500,2);
+INSERT INTO Productos(Nombre_Producto, Precio_Unitario, ID_Categoria) VALUES ('CHOCAPIC',2500,3);
+INSERT INTO Productos(Nombre_Producto, Precio_Unitario, ID_Categoria) VALUES ('TRIX',2400,3);
+
+----#  10 facturas
+Factura(Num_Factura SERIAL PRIMARY KEY, Fecha DATE NOT NULL, Sub_Total INT NOT NULL, IVA DECIMAL(3,2) NOT NULL, Total_Compra INT NOT NULL, ID_Cliente INT NOT NULL REFERENCES Cliente(ID_Cliente));
