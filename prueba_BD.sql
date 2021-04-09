@@ -22,4 +22,19 @@
 
 --"INDICADORES(IVA,UF,VALOR_USD,VALOR_EUR,...ETC)"
 
+CREATE DATABASE prueba;
+\c Prueba;
+
+CREATE TABLE Cliente(ID_Cliente SERIAL PRIMARY KEY, Nombre_Cliente VARCHAR(250) NOT NULL, RUT VARCHAR(15) NOT NULL, Direccion VARCHAR (250) NOT NULL); 
+
+CREATE TABLE Categoria(ID_Categoria SERIAL PRIMARY KEY, Nombre_Categoria VARCHAR(250) NOT NULL,  Descripcion TEXT NOT NULL); 
+
+CREATE TABLE Factura (Num_Factura SERIAL PRIMARY KEY, Fecha DATE NOT NULL, Sub_Total INT NOT NULL, IVA DECIMAL(1,2) NOT NULL, Total_Compra INT NOT NULL, ID_Cliente INT NOT NULL REFERENCES Cliente(ID_Cliente));
+
+CREATE TABLE Productos(ID_Productos SERIAL PRIMARY KEY, Nombre_Producto VARCHAR(250) NOT NULL, Precio_Unitario INT NOT NULL , Cantidad INT NOT NULL, Valor_Total INT NOT NULL, ID_Categoria INT NOT NULL REFERENCES Categoria(ID_Categoria));
+
+CREATE TABLE Detalle_Compra(Num_Factura INT NOT NULL REFERENCES Factura(Num_Facutra), ID_Producto INT NOT NULL REFERENCES Producto(ID_Producto),Precio_Unitario INT NOT NULL, Cantidad INT NOT NULL, Valor_Total INT NOT NULL);
+
+
+
 
