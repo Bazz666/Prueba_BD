@@ -29,7 +29,7 @@ CREATE TABLE Cliente(ID_Cliente SERIAL PRIMARY KEY, Nombre_Cliente VARCHAR(250) 
 
 CREATE TABLE Categoria(ID_Categoria SERIAL PRIMARY KEY, Nombre_Categoria VARCHAR(250) NOT NULL,  Descripcion TEXT NOT NULL); 
 
-CREATE TABLE Factura(Num_Factura SERIAL PRIMARY KEY, Fecha DATE NOT NULL, Sub_Total INT NOT NULL, IVA DECIMAL(3,2) NOT NULL, Total_Compra INT NOT NULL, ID_Cliente INT NOT NULL REFERENCES Cliente(ID_Cliente));
+CREATE TABLE Factura(Num_Factura SERIAL PRIMARY KEY, Fecha DATE NOT NULL, Sub_Total INT NOT NULL, IVA  INT NOT NULL, Total_Compra INT NOT NULL, ID_Cliente INT NOT NULL REFERENCES Cliente(ID_Cliente));
 
 CREATE TABLE Productos(ID_Productos SERIAL PRIMARY KEY, Nombre_Producto VARCHAR(250) NOT NULL, Precio_Unitario INT NOT NULL, ID_Categoria INT NOT NULL REFERENCES Categoria(ID_Categoria));
 
@@ -84,5 +84,58 @@ INSERT INTO Productos(Nombre_Producto, Precio_Unitario, ID_Categoria) VALUES ('V
 INSERT INTO Productos(Nombre_Producto, Precio_Unitario, ID_Categoria) VALUES ('CHOCAPIC',2500,3);
 INSERT INTO Productos(Nombre_Producto, Precio_Unitario, ID_Categoria) VALUES ('TRIX',2400,3);
 
+SELECT * FROM Productos;
+
 ----#  10 facturas
-Factura(Num_Factura SERIAL PRIMARY KEY, Fecha DATE NOT NULL, Sub_Total INT NOT NULL, IVA DECIMAL(3,2) NOT NULL, Total_Compra INT NOT NULL, ID_Cliente INT NOT NULL REFERENCES Cliente(ID_Cliente));
+------------------------------------------------------------------------------------------------------------------------------
+----#  2 para el cliente 1
+INSERT INTO Factura(Fecha, Sub_Total, IVA, Total_Compra, ID_Cliente) VALUES ('09-04-21',2000,380,2380,1);
+INSERT INTO Factura(Fecha, Sub_Total, IVA, Total_Compra, ID_Cliente) VALUES ('12-04-21',3500,665,4165,1);
+------#con 2 productos 
+INSERT INTO Detalle_Compra(Num_Factura, ID_Producto, Precio_Unitario, Cantidad, Valor_Total) VALUES (1,1,1500,1,1500);
+INSERT INTO Detalle_Compra(Num_Factura, ID_Producto, Precio_Unitario, Cantidad, Valor_Total) VALUES (1,4,500,1,500);
+------#con 3 productos
+INSERT INTO Detalle_Compra(Num_Factura, ID_Producto, Precio_Unitario, Cantidad, Valor_Total) VALUES (2,1,1500,1,1500);
+INSERT INTO Detalle_Compra(Num_Factura, ID_Producto, Precio_Unitario, Cantidad, Valor_Total) VALUES (2,5,1500,1,1500);
+INSERT INTO Detalle_Compra(Num_Factura, ID_Producto, Precio_Unitario, Cantidad, Valor_Total) VALUES (2,4,500,1,500);
+--------------------------------------------------------------------------------------------------------------------------------
+----#3 para el cliente 2
+INSERT INTO Factura(Fecha, Sub_Total, IVA, Total_Compra, ID_Cliente) VALUES ('09-04-21',7400,1406,8806,2);
+INSERT INTO Factura(Fecha, Sub_Total, IVA, Total_Compra, ID_Cliente) VALUES ('12-04-21',3400,646,4046,2);
+INSERT INTO Factura(Fecha, Sub_Total, IVA, Total_Compra, ID_Cliente) VALUES ('12-04-21',3000,570,3570,2);
+-----#con 3 Productos
+INSERT INTO Detalle_Compra(Num_Factura, ID_Producto, Precio_Unitario, Cantidad, Valor_Total) VALUES (3,8,2400,1,2400);
+INSERT INTO Detalle_Compra(Num_Factura, ID_Producto, Precio_Unitario, Cantidad, Valor_Total) VALUES (3,6,3500,1,3500);
+INSERT INTO Detalle_Compra(Num_Factura, ID_Producto, Precio_Unitario, Cantidad, Valor_Total) VALUES (3,1,1500,1,1500);
+-----#con 2 productos
+INSERT INTO Detalle_Compra(Num_Factura, ID_Producto, Precio_Unitario, Cantidad, Valor_Total) VALUES (4,1,1500,1,1500);
+INSERT INTO Detalle_Compra(Num_Factura, ID_Producto, Precio_Unitario, Cantidad, Valor_Total) VALUES (4,2,1900,1,1900);
+-----#con 3 productos
+INSERT INTO Detalle_Compra(Num_Factura, ID_Producto, Precio_Unitario, Cantidad, Valor_Total) VALUES (5,3,2000,1,2000);
+INSERT INTO Detalle_Compra(Num_Factura, ID_Producto, Precio_Unitario, Cantidad, Valor_Total) VALUES (5,4,500,1,500);
+INSERT INTO Detalle_Compra(Num_Factura, ID_Producto, Precio_Unitario, Cantidad, Valor_Total) VALUES (5,5,1500,1,1500);
+-----------------------------------------------------------------------------------------------------------------------------
+-----#1 para el cliente 3
+INSERT INTO Factura(Fecha, Sub_Total, IVA, Total_Compra, ID_Cliente) VALUES ('05-04-21',2000,380,2380,3);
+-----# con 1 producto
+INSERT INTO Detalle_Compra(Num_Factura, ID_Producto, Precio_Unitario, Cantidad, Valor_Total) VALUES (6,2,1900,1,1900);
+------------------------------------------------------------------------------------------------------------------------------
+-----#4 para el cliente 4
+INSERT INTO Factura(Fecha, Sub_Total, IVA, Total_Compra, ID_Cliente) VALUES ('04-04-21',2000,380,2380,4);
+INSERT INTO Factura(Fecha, Sub_Total, IVA, Total_Compra, ID_Cliente) VALUES ('03-03-21',2000,380,2380,4);
+INSERT INTO Factura(Fecha, Sub_Total, IVA, Total_Compra, ID_Cliente) VALUES ('10-02-21',2000,380,2380,4);
+INSERT INTO Factura(Fecha, Sub_Total, IVA, Total_Compra, ID_Cliente) VALUES ('09-01-21',2000,380,2380,4);
+-----#con 2 productos
+INSERT INTO Detalle_Compra(Num_Factura, ID_Producto, Precio_Unitario, Cantidad, Valor_Total) VALUES (7,1,1500,1,1900);
+INSERT INTO Detalle_Compra(Num_Factura, ID_Producto, Precio_Unitario, Cantidad, Valor_Total) VALUES (7,2,1900,1,1900);
+-----#con 3 productos
+INSERT INTO Detalle_Compra(Num_Factura, ID_Producto, Precio_Unitario, Cantidad, Valor_Total) VALUES (8,1,1500,1,1900);
+INSERT INTO Detalle_Compra(Num_Factura, ID_Producto, Precio_Unitario, Cantidad, Valor_Total) VALUES (8,2,1900,1,1900);
+INSERT INTO Detalle_Compra(Num_Factura, ID_Producto, Precio_Unitario, Cantidad, Valor_Total) VALUES (8,3,2000,1,1900);
+-----#con 4 productos
+INSERT INTO Detalle_Compra(Num_Factura, ID_Producto, Precio_Unitario, Cantidad, Valor_Total) VALUES (9,1,1500,1,1900);
+INSERT INTO Detalle_Compra(Num_Factura, ID_Producto, Precio_Unitario, Cantidad, Valor_Total) VALUES (9,2,1900,1,1900);
+INSERT INTO Detalle_Compra(Num_Factura, ID_Producto, Precio_Unitario, Cantidad, Valor_Total) VALUES (9,3,2000,1,1900);
+INSERT INTO Detalle_Compra(Num_Factura, ID_Producto, Precio_Unitario, Cantidad, Valor_Total) VALUES (9,4,500,1,1900);
+-----#con 1 producto
+INSERT INTO Detalle_Compra(Num_Factura, ID_Producto, Precio_Unitario, Cantidad, Valor_Total) VALUES (10,2,1900,1,1900);
