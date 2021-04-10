@@ -139,3 +139,20 @@ INSERT INTO Detalle_Compra(Num_Factura, ID_Producto, Precio_Unitario, Cantidad, 
 INSERT INTO Detalle_Compra(Num_Factura, ID_Producto, Precio_Unitario, Cantidad, Valor_Total) VALUES (9,4,500,1,1900);
 -----#con 1 producto
 INSERT INTO Detalle_Compra(Num_Factura, ID_Producto, Precio_Unitario, Cantidad, Valor_Total) VALUES (10,2,1900,1,1900);
+
+------------------------------------------------------------------------------------------------------------------------------
+
+-----#Parte 3: Consultas#-----
+-----#Realizar las siguientes consultas:
+
+-----#¿Que cliente realizó la compra más cara?
+SELECT id_cliente,total_compra from factura order by total_compra desc LIMIT 1;
+-- el cliente 2 realizo la compra mas cara por $8806
+
+-----#¿Que cliente pagó sobre 100 de monto?
+SELECT id_cliente,total_compra from factura where total_compra >100 order by total_compra desc;
+
+-----#¿Cuantos clientes han comprado el producto 6.
+select detalle_compra.num_factura, detalle_compra.id_producto, factura.id_cliente from detalle_compra INNER JOIN factura on detalle_compra.num_factura=factura.Num_factura where id_producto=6;
+
+--El cliente numero 2 con la factura numero 3 fue el unico en adquirir el producto 6.
